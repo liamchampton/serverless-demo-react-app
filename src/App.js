@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           name: name,
         }),
       });
-      
+
       if (res.status === 200) {
         setName("");
         setMessage("Name submitted successfully");
