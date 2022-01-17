@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  const [description, setDescription] = ("");
+  const [description, setDescription] = useState("");
   const [message, setMessage] = useState("");
 
   let handleSubmit = async (e) => {
