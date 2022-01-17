@@ -1,7 +1,8 @@
 .App {
   display: flex;
   justify-content: center;
-  margin-top: 5rem;
+  margin:5rem auto;
+  text-align: center;
 }
 
 .App-logo {
@@ -9,9 +10,18 @@
   pointer-events: none;
 }
 
+.iconDiv {
+  display: block;
+}
+
+.icon {
+  height: 100px;
+  width: 100px;
+}
+
 input {
   display: block;
-  width: 20rem;
+  width: 25rem;
   height: 2rem;
   padding: 0.5rem;
   font-size: 1.1em;
