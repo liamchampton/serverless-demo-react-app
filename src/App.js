@@ -8,11 +8,12 @@ function App() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [message, setMessage] = useState("");
+  const [catalogueData, setCatalogueData] = useState("");
 
   let handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await fetch(process.env.REACT_APP_FUNC_URL, {
+      let res = await fetch(process.env.REACT_APP_POST_URL, {
         method: "POST",
         body: JSON.stringify({
           name: name,
@@ -34,38 +35,69 @@ function App() {
     }
   };
 
+  let handleCatalogueFetch = async (e) => {
+    e.preventDefault();
+    try {
+      let res = await fetch(process.env.REACT_APP_GET_URL, {
+        method: "GET",
+      });
+
+      if (res.status === 200) {
+        res.json().then((value) => {
+          const catalogue = value.map(element => element.name);
+          console.log(catalogue);
+
+          setCatalogueData(JSON.stringify(catalogue))
+        });
+
+      } else {
+        console.log("error occured!")
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="App">
-      <form onSubmit={handleSubmit}>
-      <div className="iconDiv">
-        <img className="icon" src={AzureFuncLogo} alt="azure functions logo" />
-        <img className="icon" src={BookEmoji} alt="book emoji" />
-      </div>
-        <h1>Add an item to the catalogue</h1>
-        <input
-          type="text"
-          value={name}
-          placeholder="Name"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          prefix='£'
-          value={price}
-          placeholder="Price"
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <input
-          type="textarea"
-          value={description}
-          placeholder="Description"
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <button type="submit">Create</button>
+      <div class="container">
+        <form onSubmit={handleSubmit}>
+          <div className="iconDiv">
+            <img className="icon" src={AzureFuncLogo} alt="azure functions logo" />
+            <img className="icon" src={BookEmoji} alt="book emoji" />
+          </div>
+          <h1>Add an item to the catalogue</h1>
+          <input
+            type="text"
+            value={name}
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="text"
+            prefix='£'
+            value={price}
+            placeholder="Price"
+            onChange={(e) => setPrice(e.target.value)}
+          />
+          <input
+            type="textarea"
+            value={description}
+            placeholder="Description"
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <button type="submit">Create</button>
 
-        <div className="message">{message ? <p>{message}</p> : null}</div>
-      </form>
+          <div className="message">{message ? <p>{message}</p> : null}</div>
+        </form>
+
+        <div class="getBtn"><button onClick={handleCatalogueFetch}>Get all items</button></div>
+        <div class="data">
+          {catalogueData}
+        </div>
+      </div>
     </div>
+
   );
 }
 

@@ -19,6 +19,21 @@
   width: 100px;
 }
 
+.container {
+  max-width: 500px;
+  text-align: center;
+}
+
+.getBtn {
+  margin: 10px auto;
+}
+
+.data {
+  word-break: break-word;
+  white-space: normal;
+  max-width: 450px;
+}
+
 input {
   display: block;
   width: 25rem;
